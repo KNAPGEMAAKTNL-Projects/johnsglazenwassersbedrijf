@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/common/Header.astro";
 import Footer from "../components/common/Footer.astro";
@@ -6,9 +7,16 @@ import Hero from "../components/home/Hero.astro";
 import TrustBar from "../components/home/TrustBar.astro";
 import ServiceCards from "../components/home/ServiceCards.astro";
 import Reviews from "../components/home/Reviews.astro";
+import heroImage from "../assets/images/the-crew-jons-glazenwassersbedrijf.jpg";
+
+// Prerender for instant TTFB (static HTML)
+export const prerender = true;
+
+// Get optimized hero image URL for preloading
+const optimizedHero = await getImage({ src: heroImage, width: 800, height: 534, format: 'webp' });
 ---
 
-<Layout title="Home">
+<Layout title="Home" preloadImage={optimizedHero.src}>
 	<Header />
 	<main>
 		<Hero />
