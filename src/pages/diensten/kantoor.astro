@@ -1,0 +1,69 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/common/Header.astro";
+import Footer from "../../components/common/Footer.astro";
+---
+
+<Layout title="Kantoor Reiniging">
+    <Header />
+    <main>
+        <section class="bg-primary text-white pt-32 pb-20 text-center">
+            <div class="container mx-auto px-4">
+                <span
+                    class="text-accent font-bold tracking-wide uppercase text-sm mb-2 block"
+                    >Zakelijke Dienstverlening</span
+                >
+                <h1 class="font-heading font-extrabold text-5xl mb-4">
+                    Kantoor & Facilitaire Reiniging
+                </h1>
+                <p class="text-xl max-w-2xl mx-auto opacity-90">
+                    Wekelijkse schoonmaak voor een frisse werkplek.
+                </p>
+                <div class="mt-8">
+                    <a
+                        href="/offerte"
+                        class="bg-accent hover:bg-accent-dark text-navy font-bold py-3 px-8 rounded-lg shadow-lg transition-transform hover:scale-105 inline-block"
+                    >
+                        Bereken je prijs
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="prose prose-lg mx-auto text-gray-600">
+                    <h2 class="font-heading text-navy">
+                        Voor bedrijven en VvE's
+                    </h2>
+                    <p>
+                        Naast particuliere klanten bedienen wij ook zakelijke opdrachtgevers.
+                        Wij bezoeken wekelijks een aantal bedrijven en VvE's om kantoren en
+                        trappenhuizen schoon te maken. Een schone werkplek draagt bij aan
+                        een prettige werkomgeving en een goede eerste indruk voor bezoekers.
+                    </p>
+
+                    <ul class="list-none space-y-4 my-8 pl-0">
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-500 text-xl">✓</span>
+                            <span>Wekelijkse of periodieke dienstverlening</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-500 text-xl">✓</span>
+                            <span>Kantoren en trappenhuizen</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-500 text-xl">✓</span>
+                            <span>VvE's en zakelijke klanten</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-green-500 text-xl">✓</span>
+                            <span>Betrouwbare planning</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Layout>

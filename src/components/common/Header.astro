@@ -1,0 +1,102 @@
+---
+import { Phone, Star, MapPin, Menu, MessageCircle } from "lucide-astro";
+
+const navItems = [
+    { name: "Home", href: "/" },
+    { name: "Diensten", href: "/diensten" },
+    { name: "Over Ons", href: "/over-ons" },
+    { name: "Reviews", href: "/#reviews" },
+    { name: "Contact", href: "/contact" },
+];
+---
+
+<header
+    class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300"
+>
+    <!-- Top Bar -->
+    <div class="bg-navy text-white text-xs py-2">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:flex items-center gap-1.5">
+                    <MapPin class="w-3.5 h-3.5 text-primary" />
+                    <span>Betuwe & Omgeving</span>
+                </div>
+                <a href="https://www.google.com/search?q=johns+glazenwassersbedrijf" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-accent transition-colors">
+                    <div class="flex text-accent">
+                        <Star class="w-3.5 h-3.5 fill-current" />
+                        <Star class="w-3.5 h-3.5 fill-current" />
+                        <Star class="w-3.5 h-3.5 fill-current" />
+                        <Star class="w-3.5 h-3.5 fill-current" />
+                        <span class="relative inline-block w-3.5 h-3.5 overflow-hidden">
+                            <Star class="w-3.5 h-3.5 fill-current absolute left-0 top-0" style="clip-path: inset(0 50% 0 0);" />
+                            <Star class="w-3.5 h-3.5 stroke-current fill-transparent absolute left-0 top-0" />
+                        </span>
+                    </div>
+                    <span><strong>4.5/5</strong> op Google</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a
+                    href="tel:0623545276"
+                    class="flex items-center gap-1.5 font-bold hover:text-primary transition-colors"
+                >
+                    <Phone class="w-3.5 h-3.5" />
+                    <span class="hidden sm:inline">06 23545276</span>
+                </a>
+                <a
+                    href="https://wa.me/31623545276"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-1.5 font-bold hover:text-primary transition-colors"
+                    title="WhatsApp"
+                >
+                    <MessageCircle class="w-3.5 h-3.5" />
+                    <span class="hidden sm:inline">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <div class="container mx-auto px-4 py-4">
+        <nav class="flex items-center justify-between">
+            <!-- Logo -->
+            <a
+                href="/"
+                class="text-xl md:text-2xl font-heading font-extrabold text-navy tracking-tight truncate max-w-[200px] md:max-w-none"
+            >
+                John's Glazenwassersbedrijf<span class="text-primary">.</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex items-center space-x-8 font-medium">
+                {
+                    navItems.map((item) => (
+                        <li>
+                            <a
+                                href={item.href}
+                                class="text-navy hover:text-primary transition-colors"
+                            >
+                                {item.name}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <!-- CTA Button -->
+            <a
+                href="/offerte"
+                class="hidden md:inline-block bg-accent hover:bg-accent-dark text-navy font-bold py-2 px-5 rounded-lg shadow-md transition-all hover:-translate-y-0.5"
+            >
+                Bereken je prijs
+            </a>
+
+            <!-- Mobile Menu Button (Placeholder) -->
+            <button class="md:hidden text-navy p-2">
+                <span class="sr-only">Menu openen</span>
+                <Menu class="w-8 h-8" />
+            </button>
+        </nav>
+    </div>
+</header>

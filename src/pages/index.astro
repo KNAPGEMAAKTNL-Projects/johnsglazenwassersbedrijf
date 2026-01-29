@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/common/Header.astro";
+import Footer from "../components/common/Footer.astro";
+import Hero from "../components/home/Hero.astro";
+import TrustBar from "../components/home/TrustBar.astro";
+import ServiceCards from "../components/home/ServiceCards.astro";
+import Reviews from "../components/home/Reviews.astro";
+---
+
+<Layout title="Home">
+	<Header />
+	<main>
+		<Hero />
+		<TrustBar />
+		<ServiceCards />
+		<Reviews />
+
+		<!-- CTA Section -->
+		<section
+			class="bg-primary text-white py-20 text-center relative overflow-hidden"
+		>
+			<!-- Background Pattern -->
+			<div
+				class="absolute inset-0 opacity-10 bg-[url('/images/pattern.svg')]"
+			>
+			</div>
+
+			<div class="container mx-auto px-4 relative z-10">
+				<h2 class="font-heading font-extrabold text-4xl mb-6">
+					Klaar voor een frisse blik?
+				</h2>
+				<p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+					Bereken binnen 1 minuut je prijs en ontvang direct een
+					vrijblijvend voorstel.
+				</p>
+				<a
+					href="/offerte"
+					class="bg-accent hover:bg-accent-dark text-navy font-bold text-lg py-4 px-10 rounded-full shadow-lg transition-transform hover:scale-105 inline-block"
+				>
+					Bereken je prijs
+				</a>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

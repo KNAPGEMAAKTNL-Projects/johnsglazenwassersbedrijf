@@ -1,0 +1,73 @@
+---
+import { Star, User, Quote, ArrowUpRight } from 'lucide-astro';
+
+const reviews = [
+  {
+    name: "Suzan Mes",
+    date: "1 jaar geleden",
+    text: "Super blij met geleverd werk, 8 meter hoge daklijst ziet er weer toppie uit, bedankt John en co",
+    stars: 5
+  },
+  {
+    name: "Maryna Lapre-Pushkar",
+    date: "2 jaar geleden",
+    text: "Uitstekende service. Volgt afspraken, snelle communicatie. Dankjewel John!",
+    stars: 5
+  },
+  {
+    name: "Willy van Loopik",
+    date: "3 jaar geleden",
+    text: "Ramen zijn goed gezeemd. Vriendelijke mensen",
+    stars: 5
+  }
+];
+---
+
+<section id="reviews" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+             <div class="inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full text-primary font-bold text-sm mb-4">
+                <Star class="w-4 h-4 fill-current" />
+                <span>Wijkfavoriet</span>
+            </div>
+            <h2 class="font-heading font-bold text-4xl text-navy mb-4">Wat je buren zeggen</h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">Wij zijn pas tevreden als jij dat bent. Sluit je aan bij de honderden tevreden klanten in de Betuwe.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {reviews.map(review => (
+                <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100 relative group hover:shadow-md transition-shadow">
+                    <!-- Google Logo / Icon -->
+                    <div class="absolute top-8 right-8 text-gray-300 group-hover:text-gray-400 transition-colors">
+                         <Quote class="w-8 h-8 opacity-20" />
+                    </div>
+                    
+                    <div class="flex text-accent mb-4">
+                        {[...Array(review.stars)].map(() => (
+                            <Star class="w-4 h-4 fill-current" />
+                        ))}
+                    </div>
+                    
+                    <p class="text-gray-700 italic mb-6 leading-relaxed">"{review.text}"</p>
+                    
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center font-bold text-primary">
+                            <User class="w-5 h-5" />
+                        </div>
+                        <div>
+                            <p class="font-bold text-navy text-sm">{review.name}</p>
+                            <p class="text-gray-400 text-xs">{review.date}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="https://www.google.com/search?q=johns+glazenwassersbedrijf" target="_blank" rel="noopener noreferrer" class="text-primary font-bold hover:underline inline-flex items-center gap-1 group">
+                Bekijk alle reviews op Google
+                <ArrowUpRight class="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+        </div>
+    </div>
+</section>

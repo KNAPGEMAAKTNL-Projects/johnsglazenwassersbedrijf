@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0EA5E9; /* Sky Blue 500 */
+  --color-primary-dark: #0284C7; /* Sky Blue 600 */
+  --color-accent: #FACC15; /* Yellow 400 */
+  --color-accent-dark: #EAB308; /* Yellow 500 */
+  --color-navy: #0F172A; /* Slate 900 */
+  --color-navy-light: #1E293B; /* Slate 800 */
+  
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+}
