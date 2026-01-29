@@ -1,0 +1,140 @@
+---
+import { Image } from "astro:assets";
+import { Droplets, Sun, CloudRain, Home, ArrowRight, Building2, Briefcase, Layers, Zap } from "lucide-astro";
+
+import ramenWassenImage from "../../assets/images/ramen-wassen.jpg";
+import zonnepanelenImage from "../../assets/images/reinigen-van-zonnepanelen.jpg";
+import dakgotenImage from "../../assets/images/dakgoten-leegmaken.jpg";
+import houtwerkImage from "../../assets/images/reinigen-van-houtwerk-kunststof-en-trespa.jpg";
+import bouwopleveringImage from "../../assets/images/bouw-opleveringen.jpg";
+import kantoorImage from "../../assets/images/drie-glazenwassers-aan-het-glazenwassen.jpg";
+import dakpannenImage from "../../assets/images/dakpannen-reinigen.jpg";
+import telewashImage from "../../assets/images/reinigen-met-telewash-systeem.jpg";
+
+const services = [
+    {
+        title: "Glasbewassing",
+        description:
+            "Streeploos schoon inclusief kozijnen. Wij gebruiken osmose-technologie voor het beste resultaat.",
+        icon: Droplets,
+        image: ramenWassenImage,
+        alt: "Professionele glazenwasser reinigt ramen met osmose-water in de Betuwe",
+        link: "/diensten/glasbewassing",
+    },
+    {
+        title: "Zonnepanelen",
+        description:
+            "Verhoog je rendement direct. Veilig en grondig gereinigd met zacht water.",
+        icon: Sun,
+        image: zonnepanelenImage,
+        alt: "Vakkundig reinigen van zonnepanelen voor optimaal rendement",
+        link: "/diensten/zonnepanelen",
+    },
+    {
+        title: "Dakgoten",
+        description:
+            "Voorkom lekkages en waterschade. Wij maken je goten weer helemaal vrij.",
+        icon: CloudRain,
+        image: dakgotenImage,
+        alt: "Dakgoten legen en schoonmaken voorkomt waterschade",
+        link: "/diensten/dakgoten",
+    },
+    {
+        title: "Houtwerk & Trespa",
+        description:
+            "Laat je hele woning stralen. Wij reinigen al het hout- en kunststofwerk.",
+        icon: Home,
+        image: houtwerkImage,
+        alt: "Reinigen van houtwerk, kunststof kozijnen en trespa gevelbekleding",
+        link: "/diensten/houtwerk",
+    },
+    {
+        title: "Bouwoplevering",
+        description:
+            "Professionele eindreiniging na verbouwing. Klaar voor oplevering aan de klant.",
+        icon: Building2,
+        image: bouwopleveringImage,
+        alt: "Professionele bouwoplevering reiniging voor nieuwbouw en verbouwingen",
+        link: "/diensten/bouwoplevering",
+    },
+    {
+        title: "Kantoor Reiniging",
+        description:
+            "Wekelijkse schoonmaak voor kantoren, trappenhuizen en VvE's. Altijd een fris werkplek.",
+        icon: Briefcase,
+        image: kantoorImage,
+        alt: "Team glazenwassers reinigt kantoorpand en bedrijfsruimte",
+        link: "/diensten/kantoor",
+    },
+    {
+        title: "Dakpannen",
+        description:
+            "Verwijder mos en algen van je dak. Voorkomt schade en verlengt de levensduur.",
+        icon: Layers,
+        image: dakpannenImage,
+        alt: "Dakpannen reinigen en ontmossen voor langere levensduur",
+        link: "/diensten/dakpannen",
+    },
+    {
+        title: "Telewash Systeem",
+        description:
+            "Hoogwerkreiniging tot grote hoogte. Veilig en effectief voor moeilijk bereikbare plekken.",
+        icon: Zap,
+        image: telewashImage,
+        alt: "Telewash systeem voor hoogwerkreiniging van moeilijk bereikbare plekken",
+        link: "/diensten/telewash",
+    },
+];
+---
+
+<section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="font-heading font-bold text-4xl text-navy mb-4">
+                Meer dan alleen ramen lappen
+            </h2>
+            <p class="text-lg text-gray-600">
+                Wij zorgen voor het complete buitenonderhoud van je woning. Kies
+                voor losse diensten of ga voor het gemak van ons totaalpakket.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {
+                services.map((service) => (
+                    <a
+                        href={service.link}
+                        class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 flex flex-col overflow-hidden"
+                    >
+                        <div class="relative h-48 overflow-hidden">
+                            <Image
+                                src={service.image}
+                                alt={service.alt}
+                                width={400}
+                                height={233}
+                                loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            />
+                            <div class="absolute top-4 right-4 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
+                                <service.icon class="w-6 h-6 text-primary" />
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow text-center">
+                            <h3 class="font-heading font-bold text-xl text-navy mb-3 group-hover:text-primary transition-colors">
+                                {service.title}
+                            </h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                {service.description}
+                            </p>
+                            <div class="flex items-center justify-center text-primary font-semibold group-hover:gap-2 transition-all mt-auto">
+                                <span>Lees meer</span>
+                                <ArrowRight class="w-4 h-4 ml-1" />
+                            </div>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</section>

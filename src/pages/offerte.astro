@@ -1,0 +1,685 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/common/Header.astro";
+import Footer from "../components/common/Footer.astro";
+---
+
+<Layout title="Bereken je prijs">
+    <Header />
+    <main class="bg-gray-50 pt-32 pb-20 min-h-screen">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden" id="quote-calculator">
+                <div class="bg-primary p-6 text-white text-center">
+                    <h1 class="font-heading font-bold text-3xl mb-2">
+                        Bereken je prijs
+                    </h1>
+                    <p class="opacity-90">
+                        In 4 simpele stappen een vrijblijvend voorstel op maat.
+                    </p>
+                </div>
+
+                <div class="p-8 md:p-12">
+                    <!-- Progress Indicator -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between relative">
+                            <div class="w-full absolute top-1/2 left-0 h-1 bg-gray-200 -z-10"></div>
+                            <div class="w-full absolute top-1/2 left-0 h-1 bg-primary transition-all duration-300" id="progress-bar" style="width: 25%"></div>
+                            <div class="step-indicator active" id="step-ind-1">1</div>
+                            <div class="step-indicator" id="step-ind-2">2</div>
+                            <div class="step-indicator" id="step-ind-3">3</div>
+                            <div class="step-indicator" id="step-ind-4">4</div>
+                        </div>
+                        <div class="flex justify-between mt-2 text-sm font-medium text-gray-500">
+                            <span>Woning</span>
+                            <span>Diensten</span>
+                            <span>Details</span>
+                            <span>Overzicht</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Property Type & Location -->
+                    <div id="step-1">
+                        <h2 class="font-heading font-bold text-2xl text-navy mb-2 text-center">
+                            Waar woon je?
+                        </h2>
+                        <p class="text-gray-600 text-center mb-6">We werken in de hele Betuwe en omgeving</p>
+
+                        <div class="mb-8">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Postcode *
+                            </label>
+                            <input
+                                type="text"
+                                id="postcode"
+                                placeholder="bijv. 4041 AB"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-lg"
+                                maxlength="7"
+                            />
+                            <p class="text-sm text-gray-500 mt-1" id="postcode-message">We controleren of we in jouw gebied werken</p>
+                        </div>
+
+                        <h3 class="font-heading font-bold text-xl text-navy mb-4 text-center">
+                            Wat voor type woning heb je?
+                        </h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                            <button type="button" class="property-type-btn" id="btn-rijtjeshuis">
+                                <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span class="font-bold">Rijtjeshuis</span>
+                                <span class="text-xs text-gray-500">Basis tarief</span>
+                            </button>
+                            <button type="button" class="property-type-btn" id="btn-2onder1kap">
+                                <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
+                                <span class="font-bold">2-onder-1-kap</span>
+                                <span class="text-xs text-gray-500">+20%</span>
+                            </button>
+                            <button type="button" class="property-type-btn" id="btn-vrijstaand">
+                                <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 8.35V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.35A2 2 0 0 1 3.26 6.5l8-3.2a2 2 0 0 1 1.48 0l8 3.2A2 2 0 0 1 22 8.35Z"></path><path d="M6 18h12"></path><path d="M6 14h12"></path><path d="m6 10 6-3 6 3"></path></svg>
+                                <span class="font-bold">Vrijstaand</span>
+                                <span class="text-xs text-gray-500">+50%</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Services Selection -->
+                    <div id="step-2" style="display: none;">
+                        <h2 class="font-heading font-bold text-2xl text-navy mb-2 text-center">
+                            Welke diensten wil je?
+                        </h2>
+                        <p class="text-gray-600 text-center mb-6">Selecteer alles wat je nodig hebt</p>
+
+                        <div class="space-y-3 mb-8">
+                            <label class="service-checkbox">
+                                <input type="checkbox" id="svc-glasbewassing" value="45">
+                                <div class="service-content">
+                                    <div class="service-info">
+                                        <span class="font-bold text-navy">Glasbewassing</span>
+                                        <span class="text-sm text-gray-600">Inclusief kozijnen</span>
+                                    </div>
+                                    <span class="service-price">€45</span>
+                                </div>
+                            </label>
+
+                            <label class="service-checkbox">
+                                <input type="checkbox" id="svc-zonnepanelen" value="35">
+                                <div class="service-content">
+                                    <div class="service-info">
+                                        <span class="font-bold text-navy">Zonnepanelen reinigen</span>
+                                        <span class="text-sm text-gray-600">Meer rendement</span>
+                                    </div>
+                                    <span class="service-price">€35</span>
+                                </div>
+                            </label>
+
+                            <label class="service-checkbox">
+                                <input type="checkbox" id="svc-dakgoten" value="30">
+                                <div class="service-content">
+                                    <div class="service-info">
+                                        <span class="font-bold text-navy">Dakgoten leegmaken</span>
+                                        <span class="text-sm text-gray-600">Voorkom lekkages</span>
+                                    </div>
+                                    <span class="service-price">€30</span>
+                                </div>
+                            </label>
+
+                            <label class="service-checkbox">
+                                <input type="checkbox" id="svc-houtwerk" value="40">
+                                <div class="service-content">
+                                    <div class="service-info">
+                                        <span class="font-bold text-navy">Houtwerk & Trespa</span>
+                                        <span class="text-sm text-gray-600">Hele woning schoon</span>
+                                    </div>
+                                    <span class="service-price">€40</span>
+                                </div>
+                            </label>
+
+                            <label class="service-checkbox">
+                                <input type="checkbox" id="svc-dakpannen" value="60">
+                                <div class="service-content">
+                                    <div class="service-info">
+                                        <span class="font-bold text-navy">Dakpannen reinigen</span>
+                                        <span class="text-sm text-gray-600">Verwijder mos & algen</span>
+                                    </div>
+                                    <span class="service-price">€60</span>
+                                </div>
+                            </label>
+
+                            <label class="service-checkbox">
+                                <input type="checkbox" id="svc-telewash" value="75">
+                                <div class="service-content">
+                                    <div class="service-info">
+                                        <span class="font-bold text-navy">Telewash systeem</span>
+                                        <span class="text-sm text-gray-600">Hoogwerkreiniging</span>
+                                    </div>
+                                    <span class="service-price">€75</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Live Price Display -->
+                        <div class="bg-blue-50 border-2 border-primary rounded-xl p-6 text-center">
+                            <p class="text-gray-600 mb-2">Geschatte prijs</p>
+                            <p class="font-heading font-bold text-4xl text-primary" id="live-price">€0</p>
+                            <p class="text-xs text-gray-500 mt-2">Exacte prijs kan variëren o.b.v. situatie</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Contact Details -->
+                    <div id="step-3" style="display: none;">
+                        <h2 class="font-heading font-bold text-2xl text-navy mb-2 text-center">
+                            Bijna klaar!
+                        </h2>
+                        <p class="text-gray-600 text-center mb-6">Hoe kunnen we je bereiken?</p>
+
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Voor- en achternaam *
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    placeholder="Jan Janssen"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    E-mailadres *
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    placeholder="jan@voorbeeld.nl"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Telefoonnummer *
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    placeholder="06 12345678"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Wanneer wil je dat we langskomen? (optioneel)
+                                </label>
+                                <input
+                                    type="date"
+                                    id="preferred-date"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Aanvullende opmerkingen (optioneel)
+                                </label>
+                                <textarea
+                                    id="notes"
+                                    rows="3"
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                                    placeholder="Bijzonderheden, vragen, etc."
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Summary -->
+                    <div id="step-4" style="display: none;">
+                        <h2 class="font-heading font-bold text-2xl text-navy mb-2 text-center">
+                            Controleer je gegevens
+                        </h2>
+                        <p class="text-gray-600 text-center mb-6">We sturen je offerte direct naar je e-mail</p>
+
+                        <div class="space-y-4 mb-6">
+                            <div class="bg-gray-50 rounded-xl p-6" id="summary-content">
+                                <!-- Filled by JS -->
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border-2 border-primary rounded-xl p-6 text-center mb-6">
+                            <p class="text-gray-600 mb-2">Totale geschatte prijs</p>
+                            <p class="font-heading font-bold text-5xl text-primary" id="final-price">€0</p>
+                            <p class="text-xs text-gray-500 mt-2">Vrijblijvend - exacte prijs na inspectie ter plaatse</p>
+                        </div>
+
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-sm text-green-800">
+                            <p class="font-semibold mb-1">Wat gebeurt er nu?</p>
+                            <ul class="space-y-1 text-xs">
+                                <li>✓ Je ontvangt direct een bevestiging per e-mail</li>
+                                <li>✓ We nemen binnen 24 uur contact met je op</li>
+                                <li>✓ Geen verplichtingen, volledig vrijblijvend</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="step-success" style="display: none;" class="text-center py-8">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <h2 class="font-heading font-bold text-3xl text-navy mb-4">
+                            Bedankt voor je aanvraag!
+                        </h2>
+                        <p class="text-gray-600 text-lg mb-8">
+                            We hebben je offerte-aanvraag ontvangen en nemen binnen 24 uur contact met je op.
+                        </p>
+                        <a href="tel:0623545276" class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors inline-flex items-center gap-2">
+                            Bel direct: 06 23545276
+                        </a>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between mt-8 pt-6 border-t" id="nav-buttons">
+                        <button
+                            type="button"
+                            id="back-btn"
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-lg transition-colors flex items-center gap-2"
+                            style="visibility: hidden;"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            <span>Vorige</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            id="next-btn"
+                            class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
+                            disabled
+                        >
+                            <span id="next-btn-text">Volgende stap</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-gray-400 mt-6 text-sm flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                <span>Je gegevens zijn veilig. Wij sturen geen spam.</span>
+            </p>
+        </div>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .step-indicator {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: #e5e7eb;
+        color: #6b7280;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        position: relative;
+        z-index: 10;
+        transition: all 0.3s;
+    }
+
+    .step-indicator.active {
+        background-color: #1e40af;
+        color: white;
+        transform: scale(1.1);
+    }
+
+    .step-indicator.completed {
+        background-color: #10b981;
+        color: white;
+    }
+
+    .property-type-btn {
+        border: 2px solid #e5e7eb;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.2s;
+        background: white;
+        cursor: pointer;
+        color: #6b7280;
+    }
+
+    .property-type-btn:hover {
+        transform: scale(1.05);
+        border-color: #1e40af;
+        color: #1e40af;
+    }
+
+    .property-type-btn.selected {
+        border: 2px solid #1e40af;
+        background-color: #eff6ff;
+        color: #1e40af;
+    }
+
+    .service-checkbox {
+        display: block;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .service-checkbox input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .service-content {
+        border: 2px solid #e5e7eb;
+        border-radius: 0.75rem;
+        padding: 1rem 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.2s;
+        background: white;
+    }
+
+    .service-checkbox input[type="checkbox"]:checked + .service-content {
+        border-color: #1e40af;
+        background-color: #eff6ff;
+    }
+
+    .service-checkbox:hover .service-content {
+        border-color: #1e40af;
+        transform: translateX(4px);
+    }
+
+    .service-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .service-price {
+        font-weight: bold;
+        color: #1e40af;
+        font-size: 1.125rem;
+    }
+</style>
+
+<script is:inline>
+    // State
+    let currentStep = 1;
+    let postcode = '';
+    let propertyType = '';
+    let propertyMultiplier = 1.0;
+    let selectedServices = [];
+    let totalPrice = 0;
+
+    // Betuwe & omgeving postcodes - range based check (4000-4299)
+    function isValidPostcode(pc) {
+        const num = parseInt(pc.substring(0, 4));
+        // Betuwe region: 4000-4299 covers Tiel, Culemborg, Buren, Geldermalsen, etc.
+        return num >= 4000 && num <= 4299;
+    }
+
+    // Wait for DOM
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Quote calculator loaded');
+
+        // Postcode input
+        const postcodeInput = document.getElementById('postcode');
+        if (postcodeInput) {
+            postcodeInput.addEventListener('input', function(e) {
+                postcode = e.target.value.toUpperCase().replace(/\s/g, '');
+                validateStep1();
+            });
+        }
+
+        // Property type buttons
+        document.getElementById('btn-rijtjeshuis').addEventListener('click', function() {
+            selectPropertyType('rijtjeshuis', 1.0, this);
+        });
+        document.getElementById('btn-2onder1kap').addEventListener('click', function() {
+            selectPropertyType('2onder1kap', 1.2, this);
+        });
+        document.getElementById('btn-vrijstaand').addEventListener('click', function() {
+            selectPropertyType('vrijstaand', 1.5, this);
+        });
+
+        // Service checkboxes
+        document.querySelectorAll('.service-checkbox input').forEach(function(cb) {
+            cb.addEventListener('change', function() {
+                updateServices();
+            });
+        });
+
+        // Contact form inputs
+        ['name', 'email', 'phone'].forEach(function(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', validateStep3);
+            }
+        });
+
+        // Navigation buttons
+        document.getElementById('next-btn').addEventListener('click', nextStep);
+        document.getElementById('back-btn').addEventListener('click', prevStep);
+    });
+
+    function selectPropertyType(type, multiplier, btn) {
+        propertyType = type;
+        propertyMultiplier = multiplier;
+
+        // Update UI
+        document.querySelectorAll('.property-type-btn').forEach(function(b) {
+            b.classList.remove('selected');
+        });
+        btn.classList.add('selected');
+
+        validateStep1();
+        updatePrice();
+    }
+
+    function validateStep1() {
+        const postcodeValid = postcode.length >= 6 && isValidPostcode(postcode);
+        const isValid = postcodeValid && propertyType !== '';
+
+        document.getElementById('next-btn').disabled = !isValid;
+
+        // Update postcode message
+        const msg = document.getElementById('postcode-message');
+        if (postcode.length >= 4) {
+            if (isValidPostcode(postcode)) {
+                msg.textContent = '✓ We werken in jouw gebied!';
+                msg.className = 'text-sm text-green-600 mt-1';
+            } else {
+                msg.textContent = '✗ Helaas, we werken nog niet in dit gebied';
+                msg.className = 'text-sm text-red-600 mt-1';
+            }
+        } else {
+            msg.textContent = 'We controleren of we in jouw gebied werken';
+            msg.className = 'text-sm text-gray-500 mt-1';
+        }
+    }
+
+    function updateServices() {
+        selectedServices = [];
+        document.querySelectorAll('.service-checkbox input:checked').forEach(function(cb) {
+            selectedServices.push({
+                id: cb.id,
+                price: parseInt(cb.value)
+            });
+        });
+        updatePrice();
+        validateStep2();
+    }
+
+    function updatePrice() {
+        const basePrice = selectedServices.reduce(function(sum, s) { return sum + s.price; }, 0);
+        totalPrice = Math.round(basePrice * propertyMultiplier);
+
+        const livePrice = document.getElementById('live-price');
+        if (livePrice) livePrice.textContent = '€' + totalPrice;
+
+        const finalPrice = document.getElementById('final-price');
+        if (finalPrice) finalPrice.textContent = '€' + totalPrice;
+    }
+
+    function validateStep2() {
+        document.getElementById('next-btn').disabled = selectedServices.length === 0;
+    }
+
+    function validateStep3() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+
+        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        const isValid = name.length > 0 && emailValid && phone.length >= 10;
+
+        document.getElementById('next-btn').disabled = !isValid;
+    }
+
+    function nextStep() {
+        if (currentStep < 4) {
+            currentStep++;
+            showStep(currentStep);
+        } else {
+            submitForm();
+        }
+    }
+
+    function prevStep() {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    }
+
+    function showStep(step) {
+        // Hide all steps
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById('step-' + i).style.display = 'none';
+        }
+
+        // Show current step
+        document.getElementById('step-' + step).style.display = 'block';
+
+        // Update progress indicators
+        for (let i = 1; i <= 4; i++) {
+            const ind = document.getElementById('step-ind-' + i);
+            ind.classList.remove('active', 'completed');
+            if (i === step) {
+                ind.classList.add('active');
+            } else if (i < step) {
+                ind.classList.add('completed');
+            }
+        }
+
+        // Update progress bar
+        document.getElementById('progress-bar').style.width = (step * 25) + '%';
+
+        // Update back button visibility
+        document.getElementById('back-btn').style.visibility = step > 1 ? 'visible' : 'hidden';
+
+        // Update next button text
+        document.getElementById('next-btn-text').textContent = step === 4 ? 'Offerte aanvragen' : 'Volgende stap';
+
+        // Validate current step
+        if (step === 1) validateStep1();
+        else if (step === 2) validateStep2();
+        else if (step === 3) validateStep3();
+        else if (step === 4) {
+            generateSummary();
+            document.getElementById('next-btn').disabled = false;
+        }
+    }
+
+    function generateSummary() {
+        const serviceNames = {
+            'svc-glasbewassing': 'Glasbewassing',
+            'svc-zonnepanelen': 'Zonnepanelen reinigen',
+            'svc-dakgoten': 'Dakgoten leegmaken',
+            'svc-houtwerk': 'Houtwerk & Trespa',
+            'svc-dakpannen': 'Dakpannen reinigen',
+            'svc-telewash': 'Telewash systeem'
+        };
+
+        const propertyNames = {
+            'rijtjeshuis': 'Rijtjeshuis',
+            '2onder1kap': '2-onder-1-kap woning',
+            'vrijstaand': 'Vrijstaande woning'
+        };
+
+        let html = '<div class="space-y-4">';
+        html += '<div><p class="text-sm text-gray-600 mb-1">Locatie</p><p class="font-semibold text-navy">' + postcode + '</p></div>';
+        html += '<div><p class="text-sm text-gray-600 mb-1">Type woning</p><p class="font-semibold text-navy">' + propertyNames[propertyType] + '</p></div>';
+        html += '<div><p class="text-sm text-gray-600 mb-1">Geselecteerde diensten</p><ul class="space-y-1">';
+
+        selectedServices.forEach(function(s) {
+            html += '<li class="flex justify-between"><span class="text-navy">• ' + serviceNames[s.id] + '</span><span class="text-gray-600">€' + s.price + '</span></li>';
+        });
+
+        html += '</ul></div>';
+        html += '<div class="pt-4 border-t"><p class="text-sm text-gray-600 mb-1">Contactgegevens</p>';
+        html += '<p class="text-navy">' + document.getElementById('name').value + '</p>';
+        html += '<p class="text-gray-600 text-sm">' + document.getElementById('email').value + '</p>';
+        html += '<p class="text-gray-600 text-sm">' + document.getElementById('phone').value + '</p>';
+        html += '</div></div>';
+
+        document.getElementById('summary-content').innerHTML = html;
+    }
+
+    async function submitForm() {
+        const btn = document.getElementById('next-btn');
+        btn.querySelector('span').textContent = 'Verzenden...';
+        btn.disabled = true;
+
+        const propertyTypeNames = {
+            'rijtjeshuis': 'Rijtjeshuis',
+            '2onder1kap': '2-onder-1-kap woning',
+            'vrijstaand': 'Vrijstaande woning'
+        };
+
+        const data = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            postcode: postcode,
+            propertyType: propertyTypeNames[propertyType],
+            services: selectedServices,
+            totalPrice: totalPrice,
+            preferredDate: document.getElementById('preferred-date').value || null,
+            notes: document.getElementById('notes').value || null
+        };
+
+        try {
+            const response = await fetch('/api/offerte', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                document.getElementById('step-4').style.display = 'none';
+                document.getElementById('step-success').style.display = 'block';
+                document.getElementById('nav-buttons').style.display = 'none';
+            } else {
+                alert(result.error || 'Er ging iets mis. Probeer het opnieuw.');
+                btn.querySelector('span').textContent = 'Offerte aanvragen';
+                btn.disabled = false;
+            }
+        } catch (error) {
+            alert('Er ging iets mis. Probeer het opnieuw.');
+            btn.querySelector('span').textContent = 'Offerte aanvragen';
+            btn.disabled = false;
+        }
+    }
+</script>

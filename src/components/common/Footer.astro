@@ -1,0 +1,181 @@
+---
+import { Phone, Mail, MapPin, MessageCircle } from "lucide-astro";
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-navy text-white pt-16 pb-8">
+    <div class="container mx-auto px-4">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12"
+        >
+            <!-- Brand -->
+            <div>
+                <a
+                    href="/"
+                    class="text-xl font-heading font-extrabold text-white mb-6 inline-block"
+                >
+                    John's Glazenwassersbedrijf<span class="text-primary"
+                        >.</span
+                    >
+                </a>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    Stralend schone ramen, zonder gedoe. De glazenwasser uit de
+                    Betuwe met een persoonlijke benadering.
+                </p>
+                <div class="flex space-x-4">
+                    <!-- Social Icons Placeholder -->
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="font-heading font-bold text-lg mb-4 text-accent">
+                    Snel naar
+                </h3>
+                <ul class="space-y-3">
+                    <li>
+                        <a
+                            href="/diensten"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Diensten</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/over-ons"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Over Ons</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/contact"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Contact</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/offerte"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Offerte Aanvragen</a
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div>
+                <h3 class="font-heading font-bold text-lg mb-4 text-accent">
+                    Diensten
+                </h3>
+                <ul class="space-y-3">
+                    <li>
+                        <a
+                            href="/diensten/glasbewassing"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Glasbewassing</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/diensten/zonnepanelen"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Zonnepanelen Reinigen</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/diensten/dakgoten"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Dakgoten Leegmaken</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/diensten/houtwerk"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Houtwerk & Trespa</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/diensten/bouwoplevering"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Bouwoplevering</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/diensten/kantoor"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Kantoor Reiniging</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/diensten/dakpannen"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Dakpannen Reinigen</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/diensten/telewash"
+                            class="text-gray-300 hover:text-white transition-colors"
+                            >Telewash Systeem</a
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h3 class="font-heading font-bold text-lg mb-4 text-accent">
+                    Contact
+                </h3>
+                <ul class="space-y-3 text-gray-300">
+                    <li class="flex items-start gap-3">
+                        <MapPin class="w-5 h-5 text-primary mt-0.5" />
+                        <span
+                            >Betuwe & Omgeving<br />(Tiel, Culemborg,
+                            Geldermalsen)</span
+                        >
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <Phone class="w-5 h-5 text-primary" />
+                        <a href="tel:0623545276" class="hover:text-white"
+                            >06 23545276</a
+                        >
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <Mail class="w-5 h-5 text-primary" />
+                        <a
+                            href="mailto:info@johnsglazenwassersbedrijf.nl"
+                            class="hover:text-white"
+                            >info@johnsglazenwassersbedrijf.nl</a
+                        >
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <MessageCircle class="w-5 h-5 text-primary" />
+                        <a
+                            href="https://wa.me/31623545276"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hover:text-white"
+                            >WhatsApp ons</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div
+            class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm"
+        >
+            <p>
+                &copy; {currentYear} John's Glazenwassersbedrijf. Alle rechten voorbehouden.
+            </p>
+        </div>
+    </div>
+</footer>

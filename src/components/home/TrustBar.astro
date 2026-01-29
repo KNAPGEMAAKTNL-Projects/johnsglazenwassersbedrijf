@@ -1,0 +1,37 @@
+---
+import { Star, ShieldCheck, MapPin, CheckCircle2 } from "lucide-astro";
+---
+
+<section class="bg-navy border-b border-white/5 py-4">
+    <div class="container mx-auto px-4">
+        <div
+            class="flex flex-wrap justify-center sm:justify-between items-center gap-6 text-gray-300 text-sm font-medium"
+        >
+            <a href="https://www.google.com/search?q=johns+glazenwassersbedrijf" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-white transition-colors">
+                <Star class="w-5 h-5 text-accent fill-current" />
+                <span>4.5/5 gemiddelde beoordeling</span>
+            </a>
+
+            <div class="hidden sm:block w-1 h-1 bg-gray-600 rounded-full"></div>
+
+            <div class="flex items-center gap-2">
+                <ShieldCheck class="w-5 h-5 text-green-400" />
+                <span>VCA Gecertificeerd</span>
+            </div>
+
+            <div class="hidden sm:block w-1 h-1 bg-gray-600 rounded-full"></div>
+
+            <div class="flex items-center gap-2">
+                <MapPin class="w-5 h-5 text-blue-400" />
+                <span>Actief in de hele Betuwe</span>
+            </div>
+
+            <div class="hidden sm:block w-1 h-1 bg-gray-600 rounded-full"></div>
+
+            <div class="flex items-center gap-2">
+                <CheckCircle2 class="w-5 h-5 text-accent" />
+                <span>100% tevredenheidsgarantie</span>
+            </div>
+        </div>
+    </div>
+</section>
