@@ -12,6 +12,44 @@ const brandColors = {
     white: '#ffffff',
 };
 
+// Dark mode prevention styles for iOS Mail
+// iOS Mail auto-darkens emails; these meta tags and styles prevent that
+const darkModePrevention = `
+    :root { color-scheme: light only; supported-color-schemes: light only; }
+    body, .email-body { background-color: ${brandColors.lightGray} !important; }
+    .header-bg { background-color: ${brandColors.primary} !important; }
+    .price-bg { background-color: ${brandColors.primary} !important; }
+    .footer-bg { background-color: ${brandColors.navy} !important; }
+    .cta-bg { background-color: ${brandColors.accent} !important; }
+`;
+
+const emailHead = (title: string) => `
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="supported-color-schemes" content="light only">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>${title}</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <style>
+        ${darkModePrevention}
+        @media (prefers-color-scheme: dark) {
+            .email-body { background-color: ${brandColors.lightGray} !important; }
+            .header-bg { background-color: ${brandColors.primary} !important; }
+            .price-bg { background-color: ${brandColors.primary} !important; }
+            .footer-bg { background-color: ${brandColors.navy} !important; }
+        }
+    </style>
+`;
+
 // Common inline styles for iOS compatibility
 const styles = {
     body: `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: ${brandColors.navy}; margin: 0; padding: 0; background-color: ${brandColors.lightGray};`,
@@ -84,15 +122,13 @@ export function generateOfferteEmailForCustomer(data: OfferteData): string {
 
     return `
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Je offerte-aanvraag bij John's Glazenwassersbedrijf</title>
+    ${emailHead("Je offerte-aanvraag bij John's Glazenwassersbedrijf")}
 </head>
-<body style="${styles.body}">
+<body class="email-body" style="${styles.body}">
     <div style="${styles.container}">
-        <div style="${styles.header}">
+        <div class="header-bg" style="${styles.header}">
             <h1 style="${styles.headerTitle}">John's Glazenwassersbedrijf<span style="${styles.headerAccent}">.</span></h1>
         </div>
 
@@ -103,7 +139,7 @@ export function generateOfferteEmailForCustomer(data: OfferteData): string {
                 Bedankt voor je offerte-aanvraag! We hebben je gegevens ontvangen en nemen zo snel mogelijk contact met je op om de details te bespreken.
             </p>
 
-            <div style="${styles.priceBox}">
+            <div class="price-bg" style="${styles.priceBox}">
                 <p style="${styles.priceLabel}">Geschatte prijs</p>
                 <p style="${styles.priceValue}">€${data.totalPrice}</p>
                 <p style="${styles.priceNote}">Vrijblijvend - exacte prijs na inspectie ter plaatse</p>
@@ -166,13 +202,13 @@ export function generateOfferteEmailForCustomer(data: OfferteData): string {
             </div>
 
             <p style="text-align: center; margin-top: 32px;">
-                <a href="tel:0623545276" style="${styles.ctaButton}">
+                <a href="tel:0623545276" class="cta-bg" style="${styles.ctaButton}">
                     Bel ons: 06 23545276
                 </a>
             </p>
         </div>
 
-        <div style="${styles.footer}">
+        <div class="footer-bg" style="${styles.footer}">
             <p style="${styles.footerCompany}">John's Glazenwassersbedrijf</p>
             <p style="${styles.footerP}">De glazenwasser uit de Betuwe met een persoonlijke benadering</p>
             <p style="${styles.footerP}"><a href="tel:0623545276" style="${styles.footerLink}">06 23545276</a> | <a href="mailto:info@johnsglazenwassersbedrijf.nl" style="${styles.footerLink}">info@johnsglazenwassersbedrijf.nl</a></p>
@@ -200,15 +236,13 @@ export function generateOfferteEmailForBusiness(data: OfferteData): string {
 
     return `
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nieuwe offerte-aanvraag</title>
+    ${emailHead("Nieuwe offerte-aanvraag")}
 </head>
-<body style="${styles.body}">
+<body class="email-body" style="${styles.body}">
     <div style="${styles.container}">
-        <div style="${styles.header}">
+        <div class="header-bg" style="${styles.header}">
             <h1 style="${styles.headerTitle}">Nieuwe Offerte-aanvraag<span style="${styles.headerAccent}">!</span></h1>
         </div>
 
@@ -219,7 +253,7 @@ export function generateOfferteEmailForBusiness(data: OfferteData): string {
                 Er is een nieuwe offerte-aanvraag binnengekomen via de website.
             </p>
 
-            <div style="${styles.priceBox}">
+            <div class="price-bg" style="${styles.priceBox}">
                 <p style="${styles.priceLabel}">Geschatte prijs</p>
                 <p style="${styles.priceValue}">€${data.totalPrice}</p>
             </div>
@@ -271,13 +305,13 @@ export function generateOfferteEmailForBusiness(data: OfferteData): string {
             ` : ''}
 
             <p style="text-align: center; margin-top: 32px;">
-                <a href="tel:${data.phone}" style="${styles.ctaButton}">
+                <a href="tel:${data.phone}" class="cta-bg" style="${styles.ctaButton}">
                     Bel klant direct
                 </a>
             </p>
         </div>
 
-        <div style="${styles.footer}">
+        <div class="footer-bg" style="${styles.footer}">
             <p style="${styles.footerCompany}">John's Glazenwassersbedrijf</p>
             <p style="${styles.footerP}">Automatisch verzonden via de website</p>
         </div>
@@ -290,15 +324,13 @@ export function generateOfferteEmailForBusiness(data: OfferteData): string {
 export function generateContactEmailForCustomer(data: ContactData): string {
     return `
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bedankt voor je bericht - John's Glazenwassersbedrijf</title>
+    ${emailHead("Bedankt voor je bericht - John's Glazenwassersbedrijf")}
 </head>
-<body style="${styles.body}">
+<body class="email-body" style="${styles.body}">
     <div style="${styles.container}">
-        <div style="${styles.header}">
+        <div class="header-bg" style="${styles.header}">
             <h1 style="${styles.headerTitle}">John's Glazenwassersbedrijf<span style="${styles.headerAccent}">.</span></h1>
         </div>
 
@@ -324,13 +356,13 @@ export function generateContactEmailForCustomer(data: ContactData): string {
             </div>
 
             <p style="text-align: center; margin-top: 32px;">
-                <a href="tel:0623545276" style="${styles.ctaButton}">
+                <a href="tel:0623545276" class="cta-bg" style="${styles.ctaButton}">
                     Bel ons: 06 23545276
                 </a>
             </p>
         </div>
 
-        <div style="${styles.footer}">
+        <div class="footer-bg" style="${styles.footer}">
             <p style="${styles.footerCompany}">John's Glazenwassersbedrijf</p>
             <p style="${styles.footerP}">De glazenwasser uit de Betuwe met een persoonlijke benadering</p>
             <p style="${styles.footerP}"><a href="tel:0623545276" style="${styles.footerLink}">06 23545276</a> | <a href="mailto:info@johnsglazenwassersbedrijf.nl" style="${styles.footerLink}">info@johnsglazenwassersbedrijf.nl</a></p>
@@ -348,15 +380,13 @@ export function generateContactEmailForBusiness(data: ContactData): string {
 
     return `
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nieuw contactformulier bericht</title>
+    ${emailHead("Nieuw contactformulier bericht")}
 </head>
-<body style="${styles.body}">
+<body class="email-body" style="${styles.body}">
     <div style="${styles.container}">
-        <div style="${styles.header}">
+        <div class="header-bg" style="${styles.header}">
             <h1 style="${styles.headerTitle}">Nieuw Contactbericht<span style="${styles.headerAccent}">!</span></h1>
         </div>
 
@@ -399,13 +429,13 @@ export function generateContactEmailForBusiness(data: ContactData): string {
             </div>
 
             <p style="text-align: center; margin-top: 32px;">
-                <a href="mailto:${data.email}" style="${styles.ctaButton}">
+                <a href="mailto:${data.email}" class="cta-bg" style="${styles.ctaButton}">
                     Beantwoord bericht
                 </a>
             </p>
         </div>
 
-        <div style="${styles.footer}">
+        <div class="footer-bg" style="${styles.footer}">
             <p style="${styles.footerCompany}">John's Glazenwassersbedrijf</p>
             <p style="${styles.footerP}">Automatisch verzonden via de website</p>
         </div>
