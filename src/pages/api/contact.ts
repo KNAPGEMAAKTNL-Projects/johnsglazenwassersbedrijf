@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { Resend } from 'resend';
+import { sendEmail } from '../../lib/resend';
 import { generateContactEmailForCustomer, generateContactEmailForBusiness } from '../../lib/email-templates';
 
 export const prerender = false;
@@ -27,8 +27,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
             });
         }
 
-        const resend = new Resend(apiKey);
-
         const emailData = {
             firstName: data.firstName,
             lastName: data.lastName,
@@ -39,7 +37,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         };
 
         // Send confirmation email to customer
-        const customerEmail = await resend.emails.send({
+        const customerEmail = await sendEmail(apiKey, {
             from: "John's Glazenwassersbedrijf <noreply@knapgemaakt.nl>",
             to: data.email,
             subject: "Bedankt voor je bericht - John's Glazenwassersbedrijf",
@@ -51,7 +49,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         }
 
         // Send notification to business
-        const businessEmail = await resend.emails.send({
+        const businessEmail = await sendEmail(apiKey, {
             from: "John's Glazenwassersbedrijf <noreply@knapgemaakt.nl>",
             to: 'info@johnsglazenwassersbedrijf.nl',
             subject: `Nieuw bericht van ${data.firstName} ${data.lastName}`,
