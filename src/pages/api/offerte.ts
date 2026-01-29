@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { Resend } from 'resend';
+import { sendEmail } from '../../lib/resend';
 import { generateOfferteEmailForCustomer, generateOfferteEmailForBusiness } from '../../lib/email-templates';
 
 export const prerender = false;
@@ -36,8 +36,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
             });
         }
 
-        const resend = new Resend(apiKey);
-
         // Transform services to proper format
         const services = data.services.map((s: { id: string; price: number }) => ({
             name: serviceNames[s.id] || s.id,
@@ -57,7 +55,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         };
 
         // Send email to customer
-        const customerEmail = await resend.emails.send({
+        const customerEmail = await sendEmail(apiKey, {
             from: "John's Glazenwassersbedrijf <noreply@knapgemaakt.nl>",
             to: data.email,
             subject: `Je offerte-aanvraag - €${data.totalPrice} geschat`,
@@ -69,7 +67,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         }
 
         // Send notification to business
-        const businessEmail = await resend.emails.send({
+        const businessEmail = await sendEmail(apiKey, {
             from: "John's Glazenwassersbedrijf <noreply@knapgemaakt.nl>",
             to: 'info@johnsglazenwassersbedrijf.nl',
             subject: `Nieuwe offerte-aanvraag van ${data.name} - €${data.totalPrice}`,
