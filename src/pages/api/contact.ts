@@ -51,7 +51,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
         // Send notification to business
         const businessEmail = await sendEmail(apiKey, {
             from: "John's Glazenwassersbedrijf <noreply@knapgemaakt.nl>",
-            to: 'info@johnsglazenwassersbedrijf.nl',
+            to: 'yannick@knapgemaakt.nl', // TODO: Change back to info@johnsglazenwassersbedrijf.nl before launch
             subject: `Nieuw bericht van ${data.firstName} ${data.lastName}`,
             html: generateContactEmailForBusiness(emailData),
             replyTo: data.email,
