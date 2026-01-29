@@ -7,6 +7,7 @@ import {
     Zap,
     Star,
     User,
+    MapPin,
 } from "@lucide/astro";
 import theCrewImage from "../../assets/images/the-crew-jons-glazenwassersbedrijf.jpg";
 ---
@@ -24,7 +25,7 @@ import theCrewImage from "../../assets/images/the-crew-jons-glazenwassersbedrijf
     </div>
 
     <div
-        class="container mx-auto px-4 pt-32 pb-24 md:pt-48 md:pb-32 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+        class="container mx-auto px-4 pt-32 pb-20 md:pt-48 md:pb-28 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center"
     >
         <!-- Text Content -->
         <div class="space-y-6">
@@ -69,20 +70,24 @@ import theCrewImage from "../../assets/images/the-crew-jons-glazenwassersbedrijf
                 </a>
             </div>
 
-            <div class="pt-4 text-sm text-blue-200 flex items-center gap-4">
+            <div class="pt-4 text-sm text-blue-200 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <span class="flex items-center gap-1">
-                    <CheckCircle2 class="w-4 h-4 text-green-400" />
-                    <span>Binnen 1 minuut geregeld</span>
+                    <ShieldCheck class="w-4 h-4 text-green-400" />
+                    <span>VCA Gecertificeerd</span>
                 </span>
                 <span class="flex items-center gap-1">
-                    <ShieldCheck class="w-4 h-4 text-accent" />
-                    <span>Ruim 1000+ tevreden klanten</span>
+                    <CheckCircle2 class="w-4 h-4 text-accent" />
+                    <span>18 jaar ervaring</span>
+                </span>
+                <span class="hidden md:flex items-center gap-1">
+                    <MapPin class="w-4 h-4 text-blue-400" />
+                    <span>Actief in de hele Betuwe</span>
                 </span>
             </div>
         </div>
 
-        <!-- Hero Image (Right side on Desktop) -->
-        <div class="hidden md:block relative">
+        <!-- Hero Image (Right side on Desktop, Below content on Mobile) -->
+        <div class="relative order-last md:order-none">
             <div class="relative animate-fade-in-up">
                 <!-- Team Image -->
                 <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
@@ -102,34 +107,31 @@ import theCrewImage from "../../assets/images/the-crew-jons-glazenwassersbedrijf
                     href="https://www.google.com/search?q=johns+glazenwassersbedrijf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="absolute -bottom-4 -left-4 bg-white text-navy p-4 rounded-xl shadow-lg border-l-4 border-accent hover:shadow-xl transition-shadow"
+                    class="absolute -bottom-4 -left-4 bg-white text-navy p-3 md:p-4 rounded-xl shadow-lg border-l-4 border-accent hover:shadow-xl transition-shadow"
                 >
                     <div
-                        class="flex items-center gap-1 font-heading font-bold text-lg"
+                        class="flex items-center gap-1 font-heading font-bold text-sm md:text-lg"
                     >
-                        <Star class="w-5 h-5 text-accent fill-current" />
+                        <Star class="w-4 h-4 md:w-5 md:h-5 text-accent fill-current" />
                         <span>4.5/5 Sterren</span>
                     </div>
-                    <p class="text-sm text-gray-600">op Google Reviews</p>
+                    <p class="text-xs md:text-sm text-gray-600">op Google Reviews</p>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- Wave Separator at bottom -->
-    <div
-        class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20"
-    >
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
         <svg
-            class="relative block w-full h-[60px] text-white"
-            data-name="Layer 1"
+            class="relative block w-full h-[40px] md:h-[60px] lg:h-[80px]"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
         >
             <path
-                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                class="fill-current"></path>
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                fill="#f9fafb"></path>
         </svg>
     </div>
 </section>
